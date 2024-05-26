@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const createError = require("../utils/error");
+require('dotenv').config();
 
 const register = async (req, res, next) => {
     try {
@@ -29,8 +31,14 @@ const login = async (req, res, next) => {
         const validPassword = await bcrypt.compare(req.body.password, user.password);
         if (!validPassword) return next(createError(400, "Username or Password is incorrect!"));
 
+        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.SECRET_KEY);
+
         const { password, isAdmin, ...otherData } = user._doc;
-        res.status(200).json({ ...otherData });
+        res.cookie("access_token", token, {
+            httpOnly: true,
+        })
+            .status(200)
+            .json({ ...otherData });
 
     } catch (error) {
         next(error);
