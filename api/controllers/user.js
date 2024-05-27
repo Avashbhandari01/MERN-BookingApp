@@ -2,7 +2,7 @@ const User = require("../models/User")
 
 const updateUser = async (req, res, next) => {
     try {
-        const updatedUser = await Hotel.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
             { $set: req.body },
             { new: true }
@@ -15,7 +15,7 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
     try {
-        await Hotel.findByIdAndDelete(req.params.id);
+        await User.findByIdAndDelete(req.params.id);
         res.status(200).json("User has been deleted successfully!");
     } catch (err) {
         next(err);
