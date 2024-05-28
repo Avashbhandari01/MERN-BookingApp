@@ -19,4 +19,4 @@ router.get("/:id", getHotel);
 // GET ALL
 router.get("/", getAllHotels);
 
-module.exports = router
+module.exports = router;
