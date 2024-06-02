@@ -1,5 +1,5 @@
 const express = require("express");
-const { createHotel, updateHotel, deleteHotel, getHotel, getAllHotels } = require("../controllers/hotel");
+const { createHotel, updateHotel, deleteHotel, getHotel, getAllHotels, countByCity } = require("../controllers/hotel");
 const { verifyAdmin } = require("../utils/verifyToken");
 
 const router = express.Router();
@@ -14,9 +14,15 @@ router.put("/:id", verifyAdmin, updateHotel);
 router.delete("/:id", verifyAdmin, deleteHotel);
 
 // GET
-router.get("/:id", getHotel);
+router.get("/find/:id", getHotel);
 
 // GET ALL
 router.get("/", getAllHotels);
+
+//GET COUNT BY CITY
+router.get("/countByCity", countByCity);
+
+//GET COUNT BY TYPE
+// router.get("/countByType", getHotels);
 
 module.exports = router;
