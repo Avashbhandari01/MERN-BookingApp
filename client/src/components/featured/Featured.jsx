@@ -1,6 +1,26 @@
 import "./featured.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Featured() {
+  const [responseData, setResponseData] = useState([]);
+
+  const url =
+    "http://localhost:8800/api/hotels/countByCity?cities=Berlin,Madrid,London";
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => {
+        setResponseData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [url]);
+
+  console.log(responseData);
+
   return (
     <div className="featured">
       <div className="featuredItem">
