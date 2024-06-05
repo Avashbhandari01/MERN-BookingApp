@@ -6,6 +6,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
+import useFetch from "../../hooks/useFetch";
 
 function List() {
   const location = useLocation();
@@ -13,8 +14,18 @@ function List() {
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
 
-  console.log(location);
+  const { data, loading, error, reFetch } = useFetch(
+    `http://localhost:8800/api/hotels?city=${destination}&min=${min || 0}&max=${
+      max || 9999999
+    }`
+  );
+
+  const handleClick = () => {
+    reFetch();
+  };
 
   return (
     <div>
@@ -54,6 +65,7 @@ function List() {
                 </span>
                 <input
                   type="number"
+                  onChange={(e) => setMin(e.target.value)}
                   min={1}
                   className="listSearchOptionInput"
                 />
@@ -64,6 +76,7 @@ function List() {
                 </span>
                 <input
                   type="number"
+                  onChange={(e) => setMax(e.target.value)}
                   min={1}
                   className="listSearchOptionInput"
                 />
@@ -96,17 +109,20 @@ function List() {
                 />
               </div>
             </div>
-            <button>Search</button>
+            <button onClick={handleClick}>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {loading ? (
+              "Loading please wait..."
+            ) : (
+              <>
+                {Array.isArray(data) && data.length > 0 ? (
+                  data.map((item) => <SearchItem item={item} key={item._id} />)
+                ) : (
+                  <div>No data available</div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
