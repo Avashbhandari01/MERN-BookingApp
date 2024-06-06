@@ -33,12 +33,10 @@ app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 
 app.use((err, req, res, next) => {
-    const errorStatus = err.Status || 500;
-    const errorMessage = err.Message || "Something went wrong!";
-    return res.status(errorStatus).json({
+    return res.status(err.statusCode).json({
         success: false,
-        status: errorStatus,
-        message: errorMessage,
+        status: err.statusCode || 500,
+        message: err.message || "Something went wrong!",
         stack: err.stack
     });
 });
