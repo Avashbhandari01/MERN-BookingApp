@@ -28,7 +28,6 @@ const login = async (req, res, next) => {
         const user = await User.findOne({ username: req.body.username });
         if (!user) return next(createError(404, "User not found!"));
 
-
         const validPassword = await bcrypt.compare(req.body.password, user.password);
         if (!validPassword) return next(createError(400, "Username or Password is incorrect!"));
 
@@ -40,7 +39,6 @@ const login = async (req, res, next) => {
         })
             .status(200)
             .json({ ...otherData });
-
     } catch (error) {
         next(error);
     }
