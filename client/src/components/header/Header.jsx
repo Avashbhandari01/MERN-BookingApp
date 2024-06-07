@@ -15,7 +15,6 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import { SearchContext } from "../../context/SearchContext";
-import { AuthContext } from "../../context/AuthContext";
 
 function Header({ type }) {
   const [destination, setDestination] = useState("");
@@ -45,8 +44,6 @@ function Header({ type }) {
   };
 
   const navigate = useNavigate();
-
-  const { user } = useContext(AuthContext);
 
   const { dispatch } = useContext(SearchContext);
 
@@ -93,7 +90,6 @@ function Header({ type }) {
               Get rewarded for your travels – unlock instant savings of 10% or
               more with a free booking.com account
             </p>
-            {!user && <button className="headerBtn">Sign in / Register</button>}
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />

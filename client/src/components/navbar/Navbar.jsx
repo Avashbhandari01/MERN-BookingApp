@@ -20,7 +20,7 @@ function Navbar() {
         <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
           <span className="logo">Booking.com</span>
         </Link>
-        {!user && !isLogin && (
+        {!user && !isLogin ? (
           <div className="navItems">
             <Link to="/register">
               <button className="navButton">Register</button>
@@ -29,7 +29,22 @@ function Navbar() {
               <button className="navButton">Login</button>
             </Link>
           </div>
-        )}
+        ) : null}
+
+        {user && !isLogin ? (
+          <div className="navProfile">
+            <div className="profileImg">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                alt=""
+              />
+            </div>
+            <div className="profileText">
+              <p>Your Account</p>
+              <span>Genius Level 1</span>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
