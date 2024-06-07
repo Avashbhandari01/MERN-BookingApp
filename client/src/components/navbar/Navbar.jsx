@@ -2,10 +2,14 @@ import { useContext, useState, useEffect } from "react";
 import "./navbar.css";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { BiUser } from "react-icons/bi";
+import { IoLockClosedOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 
 function Navbar() {
   const { user } = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -32,18 +36,45 @@ function Navbar() {
         ) : null}
 
         {user && !isLogin ? (
-          <div className="navProfile">
-            <div className="profileImg">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                alt=""
-              />
+          <>
+            <div
+              className="navProfile"
+              onClick={() => setOpenModal(!openModal)}
+            >
+              <div className="profileImg">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                  alt=""
+                />
+              </div>
+              <div className="profileText">
+                <p>Your Account</p>
+                <span>Genius Level 1</span>
+              </div>
             </div>
-            <div className="profileText">
-              <p>Your Account</p>
-              <span>Genius Level 1</span>
-            </div>
-          </div>
+            {openModal && (
+              <div className="profileModal">
+                <div className="profileModalItems">
+                  <div className="profileModalIcon">
+                    <BiUser className="profileIcon" />
+                  </div>
+                  <div className="profileModalText">Update User Profile</div>
+                </div>
+                <div className="profileModalItems">
+                  <div className="profileModalIcon">
+                    <IoLockClosedOutline className="profileIcon" />
+                  </div>
+                  <div className="profileModalText">Change Password</div>
+                </div>
+                <div className="profileModalItems">
+                  <div className="profileModalIcon">
+                    <IoLogOutOutline className="profileIcon" />
+                  </div>
+                  <div className="profileModalText">Logout</div>
+                </div>
+              </div>
+            )}
+          </>
         ) : null}
       </div>
     </div>
