@@ -1,17 +1,17 @@
-.login {
+.register {
     height: 70vh;
     display: flex;
     padding: 70px 0 0 0; 
     justify-content: center;
   }
   
-  .loginContainer {
+  .registerContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
   
-  .loginInput{
+  .registerInput{
     height: 12px;
     width: 350px;
     padding: 10px;
@@ -22,12 +22,12 @@
     color: #000; 
   }
 
-  .loginInput:focus {
+  .registerInput:focus {
     border: 1.5px solid #0071c2;
     outline: none;
   }
   
-  .loginButton {
+  .registerButton {
     border: none;
     margin-top: 12px;
     padding: 10px 20px;
@@ -38,22 +38,22 @@
     border-radius: 5px;
   }
   
-  .loginButton:disabled{
+  .registerButton:disabled{
     background-color: #0071c28c;
     cursor: not-allowed;
   }
 
-  .loginContainer h3 {
+  .registerContainer h3 {
     font-weight: 800;
     padding-bottom: 20px;
   }
 
-  .loginContainer label {
+  .registerContainer label {
     font-weight: 600;
     font-size: 13.5px;
   }
 
-  .loginText {
+  .registerText {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -63,12 +63,12 @@
     line-height: 1;
   }
 
-  .loginText p {
+  .registerText p {
     text-align: center;
     line-height: 1.6;
   }
 
-  .loginText span {
+  .registerText span {
     color: #0071c2;
     cursor: pointer;
   }

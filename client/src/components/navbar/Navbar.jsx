@@ -1,10 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 function Navbar() {
   const { user } = useContext(AuthContext);
+  const [isLogin, setIsLogin] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsLogin(
+      location.pathname === "/login" || location.pathname === "/register"
+    );
+  }, [location.pathname]);
 
   return (
     <div className="navbar">
@@ -12,12 +20,14 @@ function Navbar() {
         <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
           <span className="logo">Booking.com</span>
         </Link>
-        {user ? (
-          user.username
-        ) : (
+        {!user && !isLogin && (
           <div className="navItems">
-            <button className="navButton">Register</button>
-            <button className="navButton">Login</button>
+            <Link to="/register">
+              <button className="navButton">Register</button>
+            </Link>
+            <Link to="/login">
+              <button className="navButton">Login</button>
+            </Link>
           </div>
         )}
       </div>

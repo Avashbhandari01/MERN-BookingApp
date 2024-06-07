@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
 
 function Login() {
   const [credentials, setCredentials] = useState({
@@ -39,32 +40,53 @@ function Login() {
   };
 
   return (
-    <div className="login">
-      <div className="loginContainer">
-        <input
-          type="text"
-          placeholder="username"
-          id="username"
-          onChange={handleChange}
-          className="loginInput"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          onChange={handleChange}
-          className="loginInput"
-        />
-        <button
-          disabled={loading}
-          className="loginButton"
-          onClick={handleClick}
-        >
-          Login
-        </button>
-        {error && <span>{error.message}</span>}
+    <>
+      <Navbar />
+      <div className="login">
+        <div className="loginContainer">
+          <h3>Sign in or create an account</h3>
+          <label>Username</label>
+          <input
+            type="text"
+            autoComplete="off"
+            placeholder="Enter your username"
+            id="username"
+            onChange={handleChange}
+            className="loginInput"
+          />
+          <label>Password</label>
+          <input
+            type="password"
+            autoComplete="off"
+            placeholder="Enter your password"
+            id="password"
+            onChange={handleChange}
+            className="loginInput"
+          />
+          <button
+            disabled={loading}
+            className="loginButton"
+            onClick={handleClick}
+          >
+            Login
+          </button>
+          <div className="loginText">
+            <p>
+              By signing in or creating an account, you agree with our{" "}
+              <span>
+                Terms &amp; <br /> conditions &nbsp;
+              </span>
+              and <span>Privacy statement</span>
+            </p>
+            <p>
+              All rights reserved. <br />
+              Copyright (2006 - 2024) - Booking.com™
+            </p>
+          </div>
+          {error && <span>{error.message}</span>}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
