@@ -33,9 +33,9 @@ app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 
 app.use((err, req, res, next) => {
-    return res.status(err.statusCode).json({
+    return res.status(err.status).json({
         success: false,
-        status: err.statusCode || 500,
+        status: err.status || 500,
         message: err.message || "Something went wrong!",
         stack: err.stack
     });
