@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import "./navbar.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { BiUser } from "react-icons/bi";
 import { IoLockClosedOutline } from "react-icons/io5";
@@ -12,11 +12,20 @@ function Navbar() {
   const [openModal, setOpenModal] = useState(false);
   const location = useLocation();
 
+  const { dispatch } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     setIsLogin(
       location.pathname === "/login" || location.pathname === "/register"
     );
   }, [location.pathname]);
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+  };
 
   return (
     <div className="navbar">
@@ -70,7 +79,9 @@ function Navbar() {
                   <div className="profileModalIcon">
                     <IoLogOutOutline className="profileIcon" />
                   </div>
-                  <div className="profileModalText">Logout</div>
+                  <div className="profileModalText" onClick={handleLogout}>
+                    Logout
+                  </div>
                 </div>
               </div>
             )}
