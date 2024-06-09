@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
+import { Toaster, toast } from "sonner";
 
 function Login() {
   const [credentials, setCredentials] = useState({
@@ -30,12 +31,13 @@ function Login() {
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       navigate("/");
     } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "An unexpected error occurred";
       dispatch({
         type: "LOGIN_FAILURE",
-        payload: error.response?.data || {
-          message: "An unexpected error occurred",
-        },
+        payload: { message: errorMessage },
       });
+      toast.error(errorMessage);
     }
   };
 
@@ -83,9 +85,9 @@ function Login() {
               Copyright (2006 - 2024) - Booking.com™
             </p>
           </div>
-          {error && <span>{error.message}</span>}
         </div>
       </div>
+      <Toaster position="top-center" richColors />
     </>
   );
 }
