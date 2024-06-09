@@ -6,6 +6,22 @@ require('dotenv').config();
 
 const register = async (req, res, next) => {
     try {
+        if (!req.body.username || !req.body.email || !req.body.password) {
+            return next(createError(400, "Please fill all the textfields!"));
+        }
+
+        const existingUser = await User.findOne({ username: req.body.username })
+
+        if (existingUser) {
+            return next(createError(400, "Username already exists!"));
+        }
+
+        const existingEmail = await User.findOne({ email: req.body.email })
+
+        if (existingEmail) {
+            return next(createError(400, "Email already exists!"));
+        }
+
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -25,6 +41,10 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
     try {
+        if (!req.body.username || !req.body.password) {
+            return next(createError(400, "Please fill all the textfields!"));
+        }
+
         const user = await User.findOne({ username: req.body.username });
         if (!user) return next(createError(404, "User not found!"));
 
