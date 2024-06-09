@@ -5,25 +5,34 @@ import { Toaster, toast } from "sonner";
 import axios from "axios";
 
 function Register() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [credentials, setCredentials] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8800/api/auth/register", {
-        username,
-        email,
-        password,
-      });
+      await axios.post("http://localhost:8800/api/auth/register", credentials);
       toast.success("User created successfully!");
-      // Clear the text fields
-      setUsername("");
-      setEmail("");
-      setPassword("");
+      setCredentials({
+        username: "",
+        email: "",
+        password: "",
+      });
     } catch (error) {
-      toast.error("An unexpected error occurred");
+      if (error.response && error.response.data) {
+        toast.error(
+          error.response.data.message || "An unexpected error occurred"
+        );
+      } else {
+        toast.error("An unexpected error occurred");
+      }
     }
   };
 
@@ -40,8 +49,8 @@ function Register() {
             placeholder="username"
             id="username"
             className="registerInput"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={credentials.username}
+            onChange={handleChange}
           />
           <label>Email</label>
           <input
@@ -50,8 +59,8 @@ function Register() {
             placeholder="email"
             id="email"
             className="registerInput"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={credentials.email}
+            onChange={handleChange}
           />
           <label>Password</label>
           <input
@@ -60,8 +69,8 @@ function Register() {
             placeholder="password"
             id="password"
             className="registerInput"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={credentials.password}
+            onChange={handleChange}
           />
 
           <button className="registerButton" onClick={handleClick}>
