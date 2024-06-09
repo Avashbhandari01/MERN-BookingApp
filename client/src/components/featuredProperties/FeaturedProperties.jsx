@@ -1,5 +1,6 @@
 import "./featuredProperties.css";
 import useFetch from "../../hooks/useFetch";
+import Skeleton from "../skeleton/Skeleton";
 
 function FeaturedProperties() {
   const { data, loading, error } = useFetch(
@@ -9,7 +10,7 @@ function FeaturedProperties() {
   return (
     <div className="featuredProperties">
       {loading ? (
-        "Loading please wait..."
+        <Skeleton type="property" />
       ) : (
         <>
           {data.map((item) => (

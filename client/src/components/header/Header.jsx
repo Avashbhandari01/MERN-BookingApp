@@ -50,7 +50,7 @@ function Header({ type }) {
 
   const handleSearch = () => {
     if (!destination) {
-      toast.error("Please enter a destination!");
+      toast.warning("Please enter a destination!");
       return;
     }
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });

@@ -1,5 +1,6 @@
 import "./featured.css";
 import useFetch from "../../hooks/useFetch";
+import Skeleton from "../skeleton/Skeleton";
 
 function Featured() {
   const { data, loading, error } = useFetch(
@@ -9,7 +10,7 @@ function Featured() {
   return (
     <div className="featured">
       {loading ? (
-        "Loading please wait..."
+        <Skeleton type="feature" />
       ) : (
         <>
           <div className="featuredItem">

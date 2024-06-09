@@ -1,5 +1,6 @@
 import "./propertyList.css";
 import useFetch from "../../hooks/useFetch";
+import Skeleton from "../skeleton/Skeleton";
 
 function PropertyList() {
   const { data, loading, error } = useFetch(
@@ -17,7 +18,7 @@ function PropertyList() {
   return (
     <div className="propertyList">
       {loading ? (
-        "Loading please wait..."
+        <Skeleton type="property" />
       ) : (
         <>
           {data &&
