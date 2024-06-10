@@ -4,6 +4,7 @@ const authRoute = require("./routes/auth");
 const usersRoute = require("./routes/users");
 const roomsRoute = require("./routes/rooms");
 const hotelsRoute = require("./routes/hotels");
+const propertyTypeRoute = require("./routes/propertyType");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
@@ -31,6 +32,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
+app.use("/api/propertyType", propertyTypeRoute);
 
 app.use((err, req, res, next) => {
     return res.status(err.status).json({
