@@ -45,7 +45,7 @@ function PropertyList() {
   return (
     <div className="propertyList">
       {loading ? (
-        "Loading please wait..."
+        <Skeleton type="slider" />
       ) : (
         <>
           <Slider {...settings}>
