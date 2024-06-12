@@ -67,7 +67,12 @@ function Navbar() {
                   <div className="profileModalIcon">
                     <BiUser className="profileIcon" />
                   </div>
-                  <div className="profileModalText">Update User Profile</div>
+                  <Link
+                    to="/personalinfo"
+                    style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    <div className="profileModalText">Update User Profile</div>
+                  </Link>
                 </div>
                 <div className="profileModalItems">
                   <div className="profileModalIcon">

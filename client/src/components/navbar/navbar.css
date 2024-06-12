@@ -113,3 +113,8 @@
     align-items: center;
     justify-content: center;
 }
+
+.profileModalText {
+    color: inherit;
+    text-decoration: none;
+}
