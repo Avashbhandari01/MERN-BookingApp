@@ -57,7 +57,7 @@ function Navbar() {
                 />
               </div>
               <div className="profileText">
-                <p>Your Account</p>
+                <p>Your account</p>
                 <span>Genius Level 1</span>
               </div>
             </div>
