@@ -1,7 +1,9 @@
 import Navbar from "../../components/navbar/Navbar";
 import "./personalDetails.css";
+import { useState } from "react";
 
 function PersonalDetails() {
+  const [check, setCheck] = useState(false);
   return (
     <>
       <Navbar />
@@ -15,75 +17,47 @@ function PersonalDetails() {
         </div>
         <div className="pdFormContainer">
           <div className="pdFormInfo">
-            <p>Name</p>
-            <div className="placeholder">
-              <p>Let us know what to call you</p>
+            <div>
+              <p className="fixedName">Name</p>
             </div>
+            {check ? (
+              <div className="placeholder">
+                <div className="pdNameInput">
+                  <label>First name(s)</label>
+                  <input type="text" id="firstname" />
+                </div>
+                <div className="pdNameInput">
+                  <label>Last name(s)</label>
+                  <input type="text" id="username" />
+                </div>
+              </div>
+            ) : (
+              <div className="placeholder">
+                <p>Let us know what to call you</p>
+              </div>
+            )}
           </div>
-          <button className="btnEdit">Edit</button>
-        </div>
-        <div className="pdFormContainer">
-          <div className="pdFormInfo">
-            <p>Display name</p>
-            <div className="placeholder">
-              <p>Choose a display name</p>
+          {check ? (
+            <div className="pdButtons">
+              <button
+                onClick={() => {
+                  setCheck(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button>Save</button>
             </div>
-          </div>
-          <button className="btnEdit">Edit</button>
-        </div>
-        <div className="pdFormContainer">
-          <div className="pdFormInfo">
-            <p>Email</p>
-            <div className="placeholder">
-              <p>avash115@gmail.com</p>
-            </div>
-          </div>
-          <button className="btnEdit">Edit</button>
-        </div>
-        <div className="pdFormContainer">
-          <div className="pdFormInfo">
-            <p>Phone number</p>
-            <div className="placeholder">
-              <p>Add your phone number</p>
-            </div>
-          </div>
-          <button className="btnEdit">Edit</button>
-        </div>
-        <div className="pdFormContainer">
-          <div className="pdFormInfo">
-            <p>Date of birth</p>
-            <div className="placeholder">
-              <p>Enter your date of birth</p>
-            </div>
-          </div>
-          <button className="btnEdit">Edit</button>
-        </div>
-        <div className="pdFormContainer">
-          <div className="pdFormInfo">
-            <p>Nationality</p>
-            <div className="placeholder">
-              <p>Choose your country/region</p>
-            </div>
-          </div>
-          <button className="btnEdit">Edit</button>
-        </div>
-        <div className="pdFormContainer">
-          <div className="pdFormInfo">
-            <p>Gender</p>
-            <div className="placeholder">
-              <p>Select your gender</p>
-            </div>
-          </div>
-          <button className="btnEdit">Edit</button>
-        </div>
-        <div className="pdFormContainer">
-          <div className="pdFormInfo">
-            <p>Address</p>
-            <div className="placeholder">
-              <p>Add your address</p>
-            </div>
-          </div>
-          <button className="btnEdit">Edit</button>
+          ) : (
+            <button
+              className="btnEdit"
+              onClick={() => {
+                setCheck(true);
+              }}
+            >
+              Edit
+            </button>
+          )}
         </div>
       </div>
     </>
