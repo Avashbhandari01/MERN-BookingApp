@@ -6,6 +6,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import PersonalDetails from "./pages/personalDetails/PersonalDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
+import fields from "./data/fieldsConfig";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
             path="/personalinfo"
             element={
               <ProtectedRoute>
-                <PersonalDetails />
+                <PersonalDetails fields={fields} />
               </ProtectedRoute>
             }
           />

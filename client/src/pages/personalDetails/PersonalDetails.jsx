@@ -1,9 +1,8 @@
 import Navbar from "../../components/navbar/Navbar";
+import Field from "../../components/field/Field";
 import "./personalDetails.css";
-import { useState } from "react";
 
-function PersonalDetails() {
-  const [check, setCheck] = useState(false);
+function PersonalDetails({ fields }) {
   return (
     <>
       <Navbar />
@@ -15,50 +14,9 @@ function PersonalDetails() {
           </div>
           <div className="pdIcon"></div>
         </div>
-        <div className="pdFormContainer">
-          <div className="pdFormInfo">
-            <div>
-              <p className="fixedName">Name</p>
-            </div>
-            {check ? (
-              <div className="placeholder">
-                <div className="pdNameInput">
-                  <label>First name(s)</label>
-                  <input type="text" id="firstname" />
-                </div>
-                <div className="pdNameInput">
-                  <label>Last name(s)</label>
-                  <input type="text" id="username" />
-                </div>
-              </div>
-            ) : (
-              <div className="placeholder">
-                <p>Let us know what to call you</p>
-              </div>
-            )}
-          </div>
-          {check ? (
-            <div className="pdButtons">
-              <button
-                onClick={() => {
-                  setCheck(false);
-                }}
-              >
-                Cancel
-              </button>
-              <button>Save</button>
-            </div>
-          ) : (
-            <button
-              className="btnEdit"
-              onClick={() => {
-                setCheck(true);
-              }}
-            >
-              Edit
-            </button>
-          )}
-        </div>
+        {fields.map((field, index) => (
+          <Field key={index} field={field} />
+        ))}
       </div>
     </>
   );
